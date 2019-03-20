@@ -1,6 +1,6 @@
 package cl.redbanc.mvp.enrollment.api.model;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -12,6 +12,8 @@ import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import cl.redbanc.mvp.enrollment.data.model.CreditorAccounts;
+
 /**
  * CreditorAccount
  */
@@ -20,8 +22,8 @@ public class CreditorAccountsDto {
 	@JsonProperty("identification")
 	private String identification = null;
 
-	@JsonProperty("secundaryIdentification")
-	private String secundaryIdentification = null;
+	@JsonProperty("secondaryIdentification")
+	private String secondaryIdentification = null;
 
 	@JsonProperty("name")
 	private String name = null;
@@ -30,7 +32,7 @@ public class CreditorAccountsDto {
 	private String destinationDNI = null;
 
 	@JsonProperty("validThru")
-	private OffsetDateTime validThru = null;
+	private Date validThru = null;
 
 	public CreditorAccountsDto identification(String identification) {
 		this.identification = identification;
@@ -53,25 +55,25 @@ public class CreditorAccountsDto {
 		this.identification = identification;
 	}
 
-	public CreditorAccountsDto secundaryIdentification(String secundaryIdentification) {
-		this.secundaryIdentification = secundaryIdentification;
+	public CreditorAccountsDto secondaryIdentification(String secondaryIdentification) {
+		this.secondaryIdentification = secondaryIdentification;
 		return this;
 	}
 
 	/**
-	 * Get secundaryIdentification
+	 * Get secondaryIdentification
 	 * 
-	 * @return secundaryIdentification
+	 * @return secondaryIdentification
 	 **/
 	@NotNull
 	@Pattern(regexp = "^\\d{5}$")
 	@Size(min = 5, max = 5)
-	public String getSecundaryIdentification() {
-		return secundaryIdentification;
+	public String getSecondaryIdentification() {
+		return secondaryIdentification;
 	}
 
-	public void setSecundaryIdentification(String secundaryIdentification) {
-		this.secundaryIdentification = secundaryIdentification;
+	public void setSecondaryIdentification(String secondaryIdentification) {
+		this.secondaryIdentification = secondaryIdentification;
 	}
 
 	public CreditorAccountsDto name(String name) {
@@ -114,7 +116,7 @@ public class CreditorAccountsDto {
 		this.destinationDNI = destinationDNI;
 	}
 
-	public CreditorAccountsDto validThru(OffsetDateTime validThru) {
+	public CreditorAccountsDto validThru(Date validThru) {
 		this.validThru = validThru;
 		return this;
 	}
@@ -125,11 +127,11 @@ public class CreditorAccountsDto {
 	 * @return validThru
 	 **/
 	@Valid
-	public OffsetDateTime getValidThru() {
+	public Date getValidThru() {
 		return validThru;
 	}
 
-	public void setValidThru(OffsetDateTime validThru) {
+	public void setValidThru(Date validThru) {
 		this.validThru = validThru;
 	}
 
@@ -143,7 +145,7 @@ public class CreditorAccountsDto {
 		}
 		CreditorAccountsDto creditorAccount = (CreditorAccountsDto) o;
 		return Objects.equals(this.identification, creditorAccount.identification)
-				&& Objects.equals(this.secundaryIdentification, creditorAccount.secundaryIdentification)
+				&& Objects.equals(this.secondaryIdentification, creditorAccount.secondaryIdentification)
 				&& Objects.equals(this.name, creditorAccount.name)
 				&& Objects.equals(this.destinationDNI, creditorAccount.destinationDNI)
 				&& Objects.equals(this.validThru, creditorAccount.validThru);
@@ -151,7 +153,7 @@ public class CreditorAccountsDto {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(identification, secundaryIdentification, name, destinationDNI, validThru);
+		return Objects.hash(identification, secondaryIdentification, name, destinationDNI, validThru);
 	}
 
 	@Override
@@ -160,12 +162,23 @@ public class CreditorAccountsDto {
 		sb.append("class CreditorAccount {\n");
 
 		sb.append("    identification: ").append(toIndentedString(identification)).append("\n");
-		sb.append("    secundaryIdentification: ").append(toIndentedString(secundaryIdentification)).append("\n");
+		sb.append("    secondaryIdentification: ").append(toIndentedString(secondaryIdentification)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    destinationDNI: ").append(toIndentedString(destinationDNI)).append("\n");
 		sb.append("    validThru: ").append(toIndentedString(validThru)).append("\n");
 		sb.append("}");
 		return sb.toString();
+	}
+	
+	public CreditorAccountsDto build(CreditorAccounts creditorAccounts) {
+		
+		this.setDestinationDNI(creditorAccounts.getDestinationDNI());
+		this.setIdentification(creditorAccounts.getIdentification());
+		this.setName(creditorAccounts.getName());
+		this.setSecondaryIdentification(creditorAccounts.getSecondaryIdentification());
+		this.setValidThru(creditorAccounts.getValidThru());
+		
+		return this;
 	}
 
 	/**

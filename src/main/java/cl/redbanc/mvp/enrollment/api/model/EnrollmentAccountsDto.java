@@ -20,21 +20,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @Validated
 public class EnrollmentAccountsDto {
+	
+	@JsonProperty("enrollmentId")
+	private String enrollmentId = null;
+	
 	@JsonProperty("clientId")
 	private String clientId = null;
 
 	@JsonProperty("debtorAccount")
 	private DebtorAccountsDto debtorAccount = null;
 
-	public EnrollmentAccountsDto enrollmentId(String clientId) {
+	public EnrollmentAccountsDto enrollmentId(String enrollmentId) {
+		this.enrollmentId = enrollmentId;
+		return this;
+	}
+	
+	public EnrollmentAccountsDto clientId(String clientId) {
 		this.clientId = clientId;
 		return this;
 	}
+	
+	/**
+	 * @return the enrollmentId
+	 */
+	public String getEnrollmentId() {
+		return enrollmentId;
+	}
 
 	/**
-	 * Get enrollmentId
+	 * @param enrollmentId the enrollmentId to set
+	 */
+	public void setEnrollmentId(String enrollmentId) {
+		this.enrollmentId = enrollmentId;
+	}
+
+	/**
+	 * Get clientId
 	 * 
-	 * @return enrollmentId
+	 * @return clientId
 	 **/
 	@NotNull
 	@Pattern(regexp = "^\\d{24}$")

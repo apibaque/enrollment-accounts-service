@@ -21,8 +21,8 @@ public class DebtorAccountsDto {
 	@JsonProperty("identification")
 	private String identification = null;
 
-	@JsonProperty("secundaryIdentification")
-	private String secundaryIdentification = null;
+	@JsonProperty("secondaryIdentification")
+	private String secondaryIdentification = null;
 
 	@JsonProperty("name")
 	private String name = null;
@@ -55,25 +55,25 @@ public class DebtorAccountsDto {
 		this.identification = identification;
 	}
 
-	public DebtorAccountsDto secundaryIdentification(String secundaryIdentification) {
-		this.secundaryIdentification = secundaryIdentification;
+	public DebtorAccountsDto secondaryIdentification(String secondaryIdentification) {
+		this.secondaryIdentification = secondaryIdentification;
 		return this;
 	}
 
 	/**
-	 * Get secundaryIdentification
+	 * Get secondaryIdentification
 	 * 
-	 * @return secundaryIdentification
+	 * @return secondaryIdentification
 	 **/
 	@NotNull
 	@Pattern(regexp = "^\\d{5}$")
 	@Size(min = 5, max = 5)
-	public String getSecundaryIdentification() {
-		return secundaryIdentification;
+	public String getSecondaryIdentification() {
+		return secondaryIdentification;
 	}
 
-	public void setSecundaryIdentification(String secundaryIdentification) {
-		this.secundaryIdentification = secundaryIdentification;
+	public void setSecondaryIdentification(String secondaryIdentification) {
+		this.secondaryIdentification = secondaryIdentification;
 	}
 
 	public DebtorAccountsDto name(String name) {
@@ -153,7 +153,7 @@ public class DebtorAccountsDto {
 		}
 		DebtorAccountsDto debtorAccount = (DebtorAccountsDto) o;
 		return Objects.equals(this.identification, debtorAccount.identification)
-				&& Objects.equals(this.secundaryIdentification, debtorAccount.secundaryIdentification)
+				&& Objects.equals(this.secondaryIdentification, debtorAccount.secondaryIdentification)
 				&& Objects.equals(this.name, debtorAccount.name)
 				&& Objects.equals(this.destinationDNI, debtorAccount.destinationDNI)
 				&& Objects.equals(this.creditorAccounts, debtorAccount.creditorAccounts);
@@ -161,7 +161,7 @@ public class DebtorAccountsDto {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(identification, secundaryIdentification, name, destinationDNI, creditorAccounts);
+		return Objects.hash(identification, secondaryIdentification, name, destinationDNI, creditorAccounts);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class DebtorAccountsDto {
 		sb.append("class DebtorAccount {\n");
 
 		sb.append("    identification: ").append(toIndentedString(identification)).append("\n");
-		sb.append("    secundaryIdentification: ").append(toIndentedString(secundaryIdentification)).append("\n");
+		sb.append("    secondaryIdentification: ").append(toIndentedString(secondaryIdentification)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
 		sb.append("    destinationDNI: ").append(toIndentedString(destinationDNI)).append("\n");
 		sb.append("    creditorAccounts: ").append(toIndentedString(creditorAccounts)).append("\n");
