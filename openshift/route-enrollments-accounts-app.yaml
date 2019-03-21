@@ -1,0 +1,22 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/host.generated: "true"
+  creationTimestamp: null
+  labels:
+    app: enrollments-app
+  name: enrollments-app
+  selfLink: /apis/route.openshift.io/v1/namespaces/mongodb/routes/enrollments-app
+spec:
+  host: enrollments-app-mongodb.b9ad.pro-us-east-1.openshiftapps.com
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: enrollments-app
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress: null
