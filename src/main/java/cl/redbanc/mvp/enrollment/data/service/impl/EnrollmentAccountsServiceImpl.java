@@ -57,7 +57,12 @@ public class EnrollmentAccountsServiceImpl implements EnrollmentAccountsService 
 
 		List<CreditorAccounts> creditorAccounts = new ArrayList<>();
 		CreditorAccounts account = null;
-		CreditorAccountsDto creditAccountDto = updateDto.getDebtorAccount().getCreditorAccounts().get(0);
+		CreditorAccountsDto creditAccountDto;
+		if (updateDto.getDebtorAccount().getCreditorAccounts().isEmpty()) {		
+			creditAccountDto = new CreditorAccountsDto();
+		} else {
+			creditAccountDto = updateDto.getDebtorAccount().getCreditorAccounts().get(0);
+		}
 		int control = 0;
 		for (CreditorAccountsDto accountDto : updateDto.getDebtorAccount().getCreditorAccounts()) {
 			if (control > 0 && creditAccountDto.getIdentification().equals(accountDto.getIdentification())) {
