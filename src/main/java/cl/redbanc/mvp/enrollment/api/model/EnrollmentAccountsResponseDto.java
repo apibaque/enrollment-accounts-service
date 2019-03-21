@@ -46,7 +46,7 @@ public class EnrollmentAccountsResponseDto {
 	 * @return enrollmentId
 	 **/
 	@NotNull
-	@Pattern(regexp = "^\\d{24}$")
+	@Pattern(regexp = "^\\w{24}$")
 	@Size(min = 24, max = 24)
 	public String getEnrollmentId() {
 		return enrollmentId;

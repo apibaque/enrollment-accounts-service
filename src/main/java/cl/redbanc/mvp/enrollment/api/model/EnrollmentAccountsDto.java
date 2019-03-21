@@ -60,7 +60,7 @@ public class EnrollmentAccountsDto {
 	 * @return clientId
 	 **/
 	@NotNull
-	@Pattern(regexp = "^\\d{24}$")
+	@Pattern(regexp = "^\\w{24}$")
 	@Size(min = 24, max = 24)
 	public String getClientId() {
 		return clientId;
@@ -100,6 +100,7 @@ public class EnrollmentAccountsDto {
 		}
 		EnrollmentAccountsDto enrollmentRequest = (EnrollmentAccountsDto) o;
 		return Objects.equals(this.clientId, enrollmentRequest.clientId)
+				&& Objects.equals(this.enrollmentId, enrollmentRequest.enrollmentId)
 				&& Objects.equals(this.debtorAccount, enrollmentRequest.debtorAccount);
 	}
 
@@ -112,8 +113,8 @@ public class EnrollmentAccountsDto {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class EnrollmentRequest {\n");
-
-		sb.append("    enrollmentId: ").append(toIndentedString(clientId)).append("\n");
+		sb.append("    clientId: ").append(toIndentedString(clientId)).append("\n");
+		sb.append("    enrollmentId: ").append(toIndentedString(enrollmentId)).append("\n");
 		sb.append("    debtorAccount: ").append(toIndentedString(debtorAccount)).append("\n");
 		sb.append("}");
 		return sb.toString();

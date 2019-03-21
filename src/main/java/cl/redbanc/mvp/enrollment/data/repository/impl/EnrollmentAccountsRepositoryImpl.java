@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -166,7 +164,7 @@ public class EnrollmentAccountsRepositoryImpl
 		
 		List<EnrollmentAccounts> result = mongoTemplate.find(query, EnrollmentAccounts.class);
 		if (result.isEmpty()) {
-			throw new EntityNotFoundException(clientId);
+			return null;
 		}
 		return result.get(0);
 	}
