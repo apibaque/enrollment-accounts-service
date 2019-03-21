@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: null
+  labels:
+    app: enrollments-app
+  name: enrollments-app
+  selfLink: /api/v1/namespaces/mongodb/services/enrollments-app
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    deploymentconfig: enrollments-app
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

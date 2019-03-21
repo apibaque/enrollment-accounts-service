@@ -1,0 +1,46 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: null
+  labels:
+    app: enrollments-app
+  name: enrollments-app
+  selfLink: /apis/build.openshift.io/v1/namespaces/mongodb/buildconfigs/enrollments-app
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: enrollments-app:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: https://github.com/apibaque/enrollment-accounts-service
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: java:8
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - imageChange:
+      lastTriggeredImageID: docker-registry.default.svc:5000/openshift/java@sha256:78af15475eac13d2ff439b33a9c3bdd39147858a824c420e8042fd5f35adce15
+    type: ImageChange
+  - type: ConfigChange
+  - generic:
+      secret: 76c9b043d66802fc
+    type: Generic
+  - github:
+      secret: 730ea107f1ada214
+    type: GitHub
+status:
+  lastVersion: 1

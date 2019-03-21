@@ -1,0 +1,88 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: null
+  generation: 1
+  labels:
+    app: enrollments-app
+  name: enrollments-app
+  selfLink: /apis/apps.openshift.io/v1/namespaces/mongodb/deploymentconfigs/enrollments-app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    deploymentconfig: enrollments-app
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: enrollments-app
+        deploymentconfig: enrollments-app
+    spec:
+      containers:
+      - env:
+        - name: spring.data.mongodb.host
+          value: mongodb
+        - name: spring.data.mongodb.port
+          value: "27017"
+        - name: spring.data.mongodb.database
+          value: sampledb
+        - name: spring.data.mongodb.username
+          value: user
+        - name: spring.data.mongodb.password
+          value: user123
+        - name: server.address
+          value: 0.0.0.0
+        - name: server.port
+          value: "8080"
+        - name: springfox.documentation.swagger.v2.path
+          value: /api-docs
+        image: docker-registry.default.svc:5000/mongodb/enrollments-app@sha256:29d212a16635060989ccc6cd2d8f6b8fb3c9b90f3832368df8f69883070faeb6
+        imagePullPolicy: Always
+        name: enrollments-app
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - enrollments-app
+      from:
+        kind: ImageStreamTag
+        name: enrollments-app:latest
+        namespace: mongodb
+    type: ImageChange
+  - type: ConfigChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
